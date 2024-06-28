@@ -9,8 +9,7 @@ using namespace Eigen;
 
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
     typedef double tinytype;  // should be double if you want to generate code
@@ -26,6 +25,16 @@ extern "C"
 
     // typedef Matrix<tinytype, NSTATES, NHORIZON> tiny_MatrixNxNh;       // Nu x Nh
     // typedef Matrix<tinytype, NINPUTS, NHORIZON - 1> tiny_MatrixNuNhm1; // Nu x Nh-1
+
+    /**
+     * Solution
+     */
+    typedef struct {
+        int iter;
+        int solved;
+        tinyMatrix x; // nx x N
+        tinyMatrix u; // nu x N-1
+    } TinySolution;
 
     /**
      * Matrices that must be recomputed with changes in time step, rho
@@ -49,16 +58,6 @@ extern "C"
         int en_state_bound;
         int en_input_bound;
     } TinySettings;
-
-    /**
-     * Solution
-     */
-    typedef struct {
-        int iter;
-        int solved;
-        tinyMatrix x; // nx x N
-        tinyMatrix u; // nu x N-1
-    } TinySolution;
 
     /**
      * Problem variables
